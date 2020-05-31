@@ -28,23 +28,23 @@ spec:
       #     configMapKeyRef:
       #       name: space
       #       key: planet
-    volumeMounts:
-      - name: system
-        mountPath: /etc/admin-cred
-        # subPath: system.conf
-        readOnly: true
+    # volumeMounts:
+    #   - name: system
+    #     mountPath: /etc/admin-cred
+    #     # subPath: system.conf
+    #     readOnly: true
     resources: {}
-  volumes:
-  - name: system
-    secret:
-      secretName: test
-      items:
-      - key: username
-        path: my-group/my-username
-        mode: 0777
-      - key: password
-        path: my-group/my-password
-        mode: 0777
+  # volumes:
+  # - name: system
+  #   secret:
+  #     secretName: test
+  #     items:
+  #     - key: username
+  #       path: my-group/my-username
+  #       mode: 0777
+  #     - key: password
+  #       path: my-group/my-password
+  #       mode: 0777
   # - name: system
   #   configMap:
   #       name: system
