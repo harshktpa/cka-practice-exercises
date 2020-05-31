@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: confvolume
+  name: confvolume
+spec:
+  containers:
+  - image: busybox:latest
+    name: confvolume
+    # command: [ "/bin/sh", "-c", "echo $USERNAME  " ]
+    args:
+      - sleep
+      - "3600"
+    # env:
+    # - name: USERNAME
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: test
+    #       key: username
+    # - name: PASSWORD
+    #   valueFrom:
+    #     secretKeyRef:
+    #       name: test
+    #       key: password
+      # - name: PLANET
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: space
+      #       key: planet
+    volumeMounts:
+      - name: system
+        mountPath: /etc/admin-cred
+        # subPath: system.conf
+        readOnly: true
+    resources: {}
+  volumes:
+  - name: system
+    secret:
+      secretName: test
+      items:
+      - key: username
+        path: my-group/my-username
+        mode: 0777
+      - key: password
+        path: my-group/my-password
+        mode: 0777
+  # - name: system
+  #   configMap:
+  #       name: system
